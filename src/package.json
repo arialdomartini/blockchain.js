@@ -1,0 +1,12 @@
+{
+  "name": "org.arialdomartini.blockchainjs",
+  "version": "1.0.0",
+  "description": "A blockchain running on Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Arialdo Martini",
+  "license": "GPL-2.0-only"
+}

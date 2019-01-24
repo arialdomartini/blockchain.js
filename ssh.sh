@@ -1,6 +1,7 @@
 docker run \
        --rm \
-       -v $(pwd)/src:/app \
+       -ti \
        -w /app \
+       -v $(pwd)/src:/app \
        node \
-       npm start --silent
+       bash
