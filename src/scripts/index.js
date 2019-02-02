@@ -16,9 +16,20 @@ class Block {
 
 class GenesisBlock {
     static createNew() {
-        return new Block(0, null, 'Genesis Block', '0');
+        return new Block(0, null, 'Genesis Block', 0);
+    }
+}
+
+class Blockchain {
+    constructor() {
+        this.chain = [ GenesisBlock.createNew() ];
+    }
+
+    static create() {
+        return new Blockchain();
     }
 }
 
 module.exports.Block = Block;
 module.exports.GenesisBlock = GenesisBlock;
+module.exports.Blockchain = Blockchain;
