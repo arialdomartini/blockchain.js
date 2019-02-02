@@ -90,4 +90,37 @@ describe('Blockchain', function() {
         expect(block2.parentBlock).to.equal(block1.hash);
     });
 
+    it('should detect when a chain is valid', function() {
+        var blockchain = Blockchain.create();
+        blockchain.addBlock(new Block(1, null, "some value", null));
+        blockchain.addBlock(new Block(1, null, "other value", null));
+        blockchain.addBlock(new Block(1, null, "foobar", null));
+        blockchain.addBlock(new Block(1, null, "barbaz", null));
+
+        expect(blockchain.isValid()).to.equal(true);
+    });
+
+    it('should detect when a chain is not valid', function() {
+        var blockchain = Blockchain.create();
+        blockchain.addBlock(new Block(1, null, "some value", null));
+        blockchain.addBlock(new Block(1, null, "other value", null));
+        blockchain.addBlock(new Block(1, null, "foobar", null));
+        blockchain.addBlock(new Block(1, null, "barbaz", null));
+
+        blockchain.chain[2] = new Block(10, null, 'extraneous block', null);
+
+        expect(blockchain.isValid()).to.equal(false);
+    });
+
+    it('should detect if one block has been modified', function() {
+        var blockchain = Blockchain.create();
+        blockchain.addBlock(new Block(1, null, "some value", null));
+        blockchain.addBlock(new Block(1, null, "other value", null));
+        blockchain.addBlock(new Block(1, null, "foobar", null));
+        blockchain.addBlock(new Block(1, null, "barbaz", null));
+
+        blockchain.chain[2].data = 'modified data';
+
+        expect(blockchain.isValid()).to.equal(false);
+    });
 });

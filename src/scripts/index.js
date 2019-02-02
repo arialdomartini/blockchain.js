@@ -36,7 +36,22 @@ class Blockchain {
 
     addBlock(newBlock) {
         newBlock.parentBlock = this.getLastBlock().hash;
+        newBlock.hash = newBlock.calculateHash();
         this.chain.push(newBlock);
+    }
+
+    isValid() {
+        var previousBlockHash = null;
+        for(var i = 0; i < this.chain.length; i++)
+        {
+            var currentBlock = this.chain[i];
+            if(currentBlock.parentBlock != previousBlockHash)
+                return false;
+            if(currentBlock.hash != currentBlock.calculateHash())
+                return false;
+            previousBlockHash = currentBlock.hash;
+        }
+        return true;
     }
 }
 
