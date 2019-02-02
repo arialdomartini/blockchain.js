@@ -7,8 +7,8 @@ var Blockchain = index.Blockchain;
 describe('Blocks', function() {
     it('should have different hashes', function() {
 
-        var block1 = new Block(1, new Date().getDate(), "some data", null);
-        var block2 = new Block(100, new Date().getDate(), "some other data", null);
+        var block1 = new Block(1, new Date().getDate(), "some data");
+        var block2 = new Block(100, new Date().getDate(), "some other data");
 
         var hash1 = block1.hash;
         var hash2 = block2.hash;
@@ -17,13 +17,13 @@ describe('Blocks', function() {
     });
 
     it('are valid if their hash match the hash of their content', function() {
-        var block = new Block(100, "some date", "some data", null);
+        var block = new Block(100, "some date", "some data");
 
         expect(block.isValid()).to.equal(true);
     });
 
     it('are not valid if their hash does not match the hash of their content', function() {
-        var block = new Block(100, "some date", "some data", null);
+        var block = new Block(100, "some date", "some data");
 
         block.data = 'modified data';
 
@@ -66,7 +66,7 @@ describe('Blockchain', function() {
 
         expect(lastBlock.data).to.equal('Genesis Block');
 
-        blockchain.chain[1] = new Block(1, null, 'some data', 'some hash');
+        blockchain.chain[1] = new Block(1, null, 'some data');
 
         expect(blockchain.getLastBlock().data).to.equal('some data');
     });
@@ -74,7 +74,7 @@ describe('Blockchain', function() {
     it('should append a new block', function() {
         var blockchain = Blockchain.create();
 
-        var newBlock = new Block(0, null, "some data", null);
+        var newBlock = new Block(0, null, "some data");
         blockchain.addBlock(newBlock);
 
         var lastBlock = blockchain.getLastBlock();
@@ -95,10 +95,10 @@ describe('Blockchain', function() {
     it('should append blocks to blocks, not only to the Genesis Block', function() {
         var blockchain = Blockchain.create();
 
-        blockchain.addBlock(new Block(0, null, "some data 1", null));
+        blockchain.addBlock(new Block(0, null, "some data 1"));
         var block1 = blockchain.getLastBlock();
 
-        blockchain.addBlock(new Block(0, null, "some data 2", null));
+        blockchain.addBlock(new Block(0, null, "some data 2"));
 
         var block2 = blockchain.getLastBlock();
         expect(block2.parentBlock).to.equal(block1.hash);
@@ -106,20 +106,20 @@ describe('Blockchain', function() {
 
     it('should detect when a chain is valid', function() {
         var blockchain = Blockchain.create();
-        blockchain.addBlock(new Block(1, null, "some value", null));
-        blockchain.addBlock(new Block(1, null, "other value", null));
-        blockchain.addBlock(new Block(1, null, "foobar", null));
-        blockchain.addBlock(new Block(1, null, "barbaz", null));
+        blockchain.addBlock(new Block(1, null, "some value"));
+        blockchain.addBlock(new Block(1, null, "other value"));
+        blockchain.addBlock(new Block(1, null, "foobar"));
+        blockchain.addBlock(new Block(1, null, "barbaz"));
 
         expect(blockchain.isValid()).to.equal(true);
     });
 
     it('should detect when a chain is not valid', function() {
         var blockchain = Blockchain.create();
-        blockchain.addBlock(new Block(1, null, "some value", null));
-        blockchain.addBlock(new Block(1, null, "other value", null));
-        blockchain.addBlock(new Block(1, null, "foobar", null));
-        blockchain.addBlock(new Block(1, null, "barbaz", null));
+        blockchain.addBlock(new Block(1, null, "some value"));
+        blockchain.addBlock(new Block(1, null, "other value"));
+        blockchain.addBlock(new Block(1, null, "foobar"));
+        blockchain.addBlock(new Block(1, null, "barbaz"));
 
         blockchain.chain[2] = new Block(10, null, 'extraneous block', null);
 
@@ -128,10 +128,10 @@ describe('Blockchain', function() {
 
     it('should detect if one block has been modified', function() {
         var blockchain = Blockchain.create();
-        blockchain.addBlock(new Block(1, null, "some value", null));
-        blockchain.addBlock(new Block(1, null, "other value", null));
-        blockchain.addBlock(new Block(1, null, "foobar", null));
-        blockchain.addBlock(new Block(1, null, "barbaz", null));
+        blockchain.addBlock(new Block(1, null, "some value"));
+        blockchain.addBlock(new Block(1, null, "other value"));
+        blockchain.addBlock(new Block(1, null, "foobar"));
+        blockchain.addBlock(new Block(1, null, "barbaz"));
 
         blockchain.chain[2].data = 'modified data';
 

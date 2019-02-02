@@ -1,11 +1,10 @@
 const SHA256 = require('crypto-js/sha256');
 
 class Block {
-    constructor(index, createdAt, data, parentBlock) {
+    constructor(index, createdAt, data) {
         this.index = index;
         this.createdAt = createdAt;
         this.data = data;
-        this.parentBlock = parentBlock;
         this.hash = this.calculateHash();
     }
 
@@ -15,13 +14,16 @@ class Block {
     }
 
     isValid() {
-        return this.hash == this.calculateHash();
+        return this.hash === this.calculateHash();
     }
 }
 
 class GenesisBlock {
     static createNew() {
-        return new Block(0, null, 'Genesis Block', null);
+        var genesisBlock = new Block(0, null, 'Genesis Block');
+        genesisBlock.parentBlock = null;
+        genesisBlock.hash = genesisBlock.calculateHash();
+        return genesisBlock;
     }
 }
 
@@ -49,7 +51,7 @@ class Blockchain {
         for(var i = 0; i < this.chain.length; i++)
         {
             var currentBlock = this.chain[i];
-            if(currentBlock.parentBlock != previousBlockHash)
+            if(currentBlock.parentBlock !== previousBlockHash)
                 return false;
             if(! currentBlock.isValid())
                 return false;
