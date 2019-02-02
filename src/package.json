@@ -4,9 +4,12 @@
   "description": "A blockchain running on Node.js",
   "main": "scripts/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node scripts/main.js"
+      "test": "node_modules/.bin/mocha --reporter list",
+      "start": "node scripts/main.js"
   },
   "author": "Arialdo Martini",
-  "license": "GPL-2.0-only"
+  "license": "GPL-2.0-only",
+  "dependencies": {
+      "crypto.js": "^1.2.0"
+  }
 }
