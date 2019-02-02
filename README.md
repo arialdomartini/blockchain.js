@@ -1,32 +1,11 @@
 # blockchain.js
-A blockchain running on JavaScript
+A Blockchain running on Node.js
 
-## Build
-Run:
+## Scripts
 
-```bash
-./build.sh
-```
-
-## Serve
-Run:
-
-```bash
-./serve.sh
-```
-
-## Run tests
-Run:
-
-```bash
-./test.sh
-```
-
-## Enter the container
-Run:
-
-```bash
-./ssh.sh
-```
-
-to start a container and run a bash inside it.
+| Script       |                                           |
+|--------------|-------------------------------------------|
+|`./build.sh`  | Generate the Docker image                 |
+|`./serve.sh`  | Run the Docker container with the Web app |
+|`./test.sh`   | Run the Mocha tests                       |
+|`./ssh.sh`    | Start a container and run a bash inside it|
