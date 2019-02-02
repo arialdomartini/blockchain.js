@@ -32,6 +32,11 @@ class Blockchain {
     static create() {
         return new Blockchain();
     }
+
+    addBlock(newBlock) {
+        newBlock.parentBlock = this.getLastBlock().getHash();
+        this.chain[this.chain.length] = newBlock;
+    }
 }
 
 module.exports.Block = Block;

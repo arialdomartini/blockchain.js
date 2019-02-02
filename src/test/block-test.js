@@ -56,4 +56,17 @@ describe('Blockchain', function() {
 
         expect(blockchain.getLastBlock().data).to.equal('some data');
     })
+
+    it('should append a new block chaining the new block with the previous', function() {
+        var blockchain = Blockchain.create();
+        var genesisBlock = blockchain.getLastBlock();
+
+        var newBlock = new Block(0, null, "some data", null);
+        blockchain.addBlock(newBlock);
+
+        var lastBlock = blockchain.getLastBlock();
+
+        expect(lastBlock.data).to.equal('some data');
+        expect(lastBlock.parentBlock).to.equal(genesisBlock.getHash());
+    })
 });
