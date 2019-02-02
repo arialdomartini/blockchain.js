@@ -2,10 +2,10 @@
     "name": "org.arialdomartini.blockchainjs",
     "version": "1.0.0",
     "description": "A blockchain running on Node.js",
-    "main": "scripts/main.js",
+    "main": "scripts/index.js",
     "scripts": {
         "test": "node_modules/.bin/mocha --reporter list",
-        "start": "node scripts/main.js"
+        "start": "node scripts/index.js"
     },
     "author": "Arialdo Martini",
     "license": "GPL-2.0-only",
