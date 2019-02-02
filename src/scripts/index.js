@@ -6,6 +6,7 @@ class Block {
         this.createdAt = createdAt;
         this.data = data;
         this.parentBlock = parentBlock;
+        this.hash = this.calculateHash();
     }
 
     calculateHash() {
@@ -34,7 +35,7 @@ class Blockchain {
     }
 
     addBlock(newBlock) {
-        newBlock.parentBlock = this.getLastBlock().calculateHash();
+        newBlock.parentBlock = this.getLastBlock().hash;
         this.chain.push(newBlock);
     }
 }

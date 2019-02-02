@@ -10,8 +10,8 @@ describe('Blocks', function() {
         var block1 = new Block(1, new Date().getDate(), "some data", null);
         var block2 = new Block(100, new Date().getDate(), "some other data", null);
 
-        var hash1 = block1.calculateHash();
-        var hash2 = block2.calculateHash();
+        var hash1 = block1.hash;
+        var hash2 = block2.hash;
 
         expect(hash1).to.not.equal(hash2);
     });
@@ -55,9 +55,19 @@ describe('Blockchain', function() {
         blockchain.chain[1] = new Block(1, null, 'some data', 'some hash');
 
         expect(blockchain.getLastBlock().data).to.equal('some data');
-    })
+    });
 
-    it('should append a new block chaining the new block with the previous', function() {
+    it('should append a new block', function() {
+        var blockchain = Blockchain.create();
+
+        var newBlock = new Block(0, null, "some data", null);
+        blockchain.addBlock(newBlock);
+
+        var lastBlock = blockchain.getLastBlock();
+        expect(lastBlock.data).to.equal('some data');
+    });
+
+    it('appended blocks have a reference to the last block', function() {
         var blockchain = Blockchain.create();
         var genesisBlock = blockchain.getLastBlock();
 
@@ -65,8 +75,19 @@ describe('Blockchain', function() {
         blockchain.addBlock(newBlock);
 
         var lastBlock = blockchain.getLastBlock();
+        expect(lastBlock.parentBlock).to.equal(genesisBlock.hash);
+    });
 
-        expect(lastBlock.data).to.equal('some data');
-        expect(lastBlock.parentBlock).to.equal(genesisBlock.calculateHash());
-    })
+    it('should append blocks to blocks, not only to the Genesis Block', function() {
+        var blockchain = Blockchain.create();
+
+        blockchain.addBlock(new Block(0, null, "some data 1", null));
+        var block1 = blockchain.getLastBlock();
+
+        blockchain.addBlock(new Block(0, null, "some data 2", null));
+
+        var block2 = blockchain.getLastBlock();
+        expect(block2.parentBlock).to.equal(block1.hash);
+    });
+
 });
