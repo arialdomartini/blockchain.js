@@ -1,15 +1,19 @@
 {
-  "name": "org.arialdomartini.blockchainjs",
-  "version": "1.0.0",
-  "description": "A blockchain running on Node.js",
-  "main": "scripts/main.js",
-  "scripts": {
-      "test": "node_modules/.bin/mocha --reporter list",
-      "start": "node scripts/main.js"
-  },
-  "author": "Arialdo Martini",
-  "license": "GPL-2.0-only",
-  "dependencies": {
-      "crypto.js": "^1.2.0"
-  }
+    "name": "org.arialdomartini.blockchainjs",
+    "version": "1.0.0",
+    "description": "A blockchain running on Node.js",
+    "main": "scripts/main.js",
+    "scripts": {
+        "test": "node_modules/.bin/mocha --reporter list",
+        "start": "node scripts/main.js"
+    },
+    "author": "Arialdo Martini",
+    "license": "GPL-2.0-only",
+    "dependencies": {
+        "crypto-js": "^3.1.9-1"
+    },
+    "devDependencies": {
+        "chai": "^4.2.0",
+        "mocha": "^5.2.0"
+    }
 }
