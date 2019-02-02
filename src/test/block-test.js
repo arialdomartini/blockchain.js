@@ -15,6 +15,20 @@ describe('Blocks', function() {
 
         expect(hash1).to.not.equal(hash2);
     });
+
+    it('are valid if their hash match the hash of their content', function() {
+        var block = new Block(100, "some date", "some data", null);
+
+        expect(block.isValid()).to.equal(true);
+    });
+
+    it('are not valid if their hash does not match the hash of their content', function() {
+        var block = new Block(100, "some date", "some data", null);
+
+        block.data = 'modified data';
+
+        expect(block.isValid()).to.equal(false);
+    });
 });
 
 describe('Genesis block', function() {

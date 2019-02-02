@@ -13,6 +13,10 @@ class Block {
         return SHA256(this.index + this.createdAt + this.data + this.parentBlock)
             .toString();
     }
+
+    isValid() {
+        return this.hash == this.calculateHash();
+    }
 }
 
 class GenesisBlock {
@@ -47,7 +51,7 @@ class Blockchain {
             var currentBlock = this.chain[i];
             if(currentBlock.parentBlock != previousBlockHash)
                 return false;
-            if(currentBlock.hash != currentBlock.calculateHash())
+            if(! currentBlock.isValid())
                 return false;
             previousBlockHash = currentBlock.hash;
         }
