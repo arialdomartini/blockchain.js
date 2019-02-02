@@ -12,8 +12,15 @@ Run:
 Run:
 
 ```bash
-./serve.sh```
+./serve.sh
+```
 
+## Run tests
+Run:
+
+```bash
+./test.sh
+```
 
 ## Enter the container
 Run:
