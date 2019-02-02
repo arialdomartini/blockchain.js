@@ -10,8 +10,8 @@ describe('Blocks', function() {
         var block1 = new Block(1, new Date().getDate(), "some data", null);
         var block2 = new Block(100, new Date().getDate(), "some other data", null);
 
-        var hash1 = block1.getHash();
-        var hash2 = block2.getHash();
+        var hash1 = block1.calculateHash();
+        var hash2 = block2.calculateHash();
 
         expect(hash1).to.not.equal(hash2);
     });
@@ -67,6 +67,6 @@ describe('Blockchain', function() {
         var lastBlock = blockchain.getLastBlock();
 
         expect(lastBlock.data).to.equal('some data');
-        expect(lastBlock.parentBlock).to.equal(genesisBlock.getHash());
+        expect(lastBlock.parentBlock).to.equal(genesisBlock.calculateHash());
     })
 });

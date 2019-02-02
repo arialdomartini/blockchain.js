@@ -8,7 +8,7 @@ class Block {
         this.parentBlock = parentBlock;
     }
 
-    getHash() {
+    calculateHash() {
         return SHA256(this.index + this.createdAt + this.data + this.parentBlock)
             .toString();
     }
@@ -34,8 +34,8 @@ class Blockchain {
     }
 
     addBlock(newBlock) {
-        newBlock.parentBlock = this.getLastBlock().getHash();
-        this.chain[this.chain.length] = newBlock;
+        newBlock.parentBlock = this.getLastBlock().calculateHash();
+        this.chain.push(newBlock);
     }
 }
 
