@@ -1,9 +1,10 @@
 var expect = require('chai').expect;
-var Block = require('../scripts/index.js').Block;
+var index = require('../scripts/index.js');
+var Block = index.Block;
+var GenesisBlock = index.GenesisBlock;
 
-
-describe('Block tests', function() {
-    it('different blocks should have different hashes', function() {
+describe('Blocks', function() {
+    it('should have different hashes', function() {
 
         var block1 = new Block(1, new Date().getDate(), "some data", null);
         var block2 = new Block(100, new Date().getDate(), "some other data", null);
@@ -12,5 +13,25 @@ describe('Block tests', function() {
         var hash2 = block2.getHash();
 
         expect(hash1).to.not.equal(hash2);
+    });
+});
+
+describe('Genesis block', function() {
+    it('should have no parents', function() {
+        var genesisBlock = GenesisBlock.createNew();
+
+        expect(genesisBlock.parentBlock).to.equal("0");
+    });
+
+    it('should have index 0', function() {
+        var genesisBlock = GenesisBlock.createNew();
+
+        expect(genesisBlock.index).to.equal(0);
+    });
+
+    it('should have default content', function() {
+        var genesisBlock = GenesisBlock.createNew();
+
+        expect(genesisBlock.data).to.equal('Genesis Block');
     });
 });

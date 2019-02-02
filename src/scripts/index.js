@@ -14,4 +14,11 @@ class Block {
     }
 }
 
+class GenesisBlock {
+    static createNew() {
+        return new Block(0, null, 'Genesis Block', '0');
+    }
+}
+
 module.exports.Block = Block;
+module.exports.GenesisBlock = GenesisBlock;
