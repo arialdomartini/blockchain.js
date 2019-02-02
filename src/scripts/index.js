@@ -16,13 +16,17 @@ class Block {
 
 class GenesisBlock {
     static createNew() {
-        return new Block(0, null, 'Genesis Block', 0);
+        return new Block(0, null, 'Genesis Block', null);
     }
 }
 
 class Blockchain {
     constructor() {
         this.chain = [ GenesisBlock.createNew() ];
+    }
+
+    getLastBlock() {
+        return this.chain[this.chain.length - 1];
     }
 
     static create() {

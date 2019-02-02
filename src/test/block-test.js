@@ -21,7 +21,7 @@ describe('Genesis block', function() {
     it('should have no parents', function() {
         var genesisBlock = GenesisBlock.createNew();
 
-        expect(genesisBlock.parentBlock).to.equal(0);
+        expect(genesisBlock.parentBlock).to.equal(null);
     });
 
     it('should have index 0', function() {
@@ -44,4 +44,16 @@ describe('Blockchain', function() {
         expect(blockchain.chain.length).to.equal(1);
         expect(blockchain.chain[0].data).to.equal('Genesis Block');
     });
+
+    it('should return the last block in the chain', function() {
+        var blockchain = Blockchain.create();
+
+        var lastBlock = blockchain.getLastBlock();
+
+        expect(lastBlock.data).to.equal('Genesis Block');
+
+        blockchain.chain[1] = new Block(1, null, 'some data', 'some hash');
+
+        expect(blockchain.getLastBlock().data).to.equal('some data');
+    })
 });
