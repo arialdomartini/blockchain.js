@@ -1,9 +1,8 @@
 const SHA256 = require('crypto-js/sha256');
 
 class Block {
-    constructor(index, createdAt, data) {
+    constructor(index, data) {
         this.index = index;
-        this.createdAt = createdAt;
         this.data = data;
         this.nonce = 0;
         this.hash = this.calculateHash();
@@ -14,7 +13,7 @@ class Block {
     }
 
     calculateWithNonce(nonce) {
-        return SHA256(this.index + this.createdAt + this.data + nonce + this.parentBlock)
+        return SHA256(this.index + this.data + nonce + this.parentBlock)
             .toString();
     }
 
@@ -38,7 +37,7 @@ class Block {
 
 class GenesisBlock {
     static createNew() {
-        var genesisBlock = new Block(0, null, 'Genesis Block');
+        var genesisBlock = new Block(0, 'Genesis Block');
         genesisBlock.parentBlock = null;
         genesisBlock.hash = genesisBlock.calculateHash();
         return genesisBlock;
