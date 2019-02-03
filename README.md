@@ -1,5 +1,7 @@
 # blockchain.js
-A Blockchain running on Node.js
+A Blockchain using a SHA256 based Proof of Work puzzle.
+
+It requires Node.js, but can conveniently run inside a Docker container.
 
 ## Scripts
 
