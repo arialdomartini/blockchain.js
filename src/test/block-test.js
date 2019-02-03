@@ -17,6 +17,17 @@ describe('Blocks', function() {
         expect(hash1).to.not.equal(hash2);
     });
 
+    it('can contain objects in their transactions field', function() {
+        var block1 = new Block(1, ['1', '2', '3']);
+        var block2 = new Block(2, ['4', '5', '6']);
+
+        var hash1 = block1.hash;
+        var hash2 = block2.hash;
+
+        expect(hash1).to.not.equal(hash2);
+        console.log(hash1);
+    })
+
     it('are valid if their hash match the hash of their content', function() {
         var block = new Block(100, "some data");
         block.mine(4);

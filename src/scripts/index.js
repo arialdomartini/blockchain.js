@@ -13,7 +13,7 @@ class Block {
     }
 
     calculateWithNonce(nonce) {
-        return SHA256(this.index + this.transactions + nonce + this.parentBlock)
+        return SHA256(this.index + JSON.stringify(this.transactions) + nonce + this.parentBlock)
             .toString();
     }
 
