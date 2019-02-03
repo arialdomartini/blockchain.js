@@ -27,7 +27,7 @@ describe('Blocks', function() {
     it('are not valid if their hash does not match the hash of their content', function() {
         var block = new Block(100, "some data");
 
-        block.data = 'modified data';
+        block.transactions = 'modified data';
 
         expect(block.isValid()).to.equal(false);
     });
@@ -68,7 +68,7 @@ describe('Genesis block', function() {
     it('should have default content', function() {
         var genesisBlock = GenesisBlock.createNew();
 
-        expect(genesisBlock.data).to.equal('Genesis Block');
+        expect(genesisBlock.transactions).to.equal('Genesis Block');
     });
 });
 
@@ -77,7 +77,7 @@ describe('Blockchain', function() {
         var blockchain = Blockchain.createWithDifficulty(0);
 
         expect(blockchain.chain.length).to.equal(1);
-        expect(blockchain.chain[0].data).to.equal('Genesis Block');
+        expect(blockchain.chain[0].transactions).to.equal('Genesis Block');
     });
 
     it('should return the last block in the chain', function() {
@@ -85,11 +85,11 @@ describe('Blockchain', function() {
 
         var lastBlock = blockchain.getLastBlock();
 
-        expect(lastBlock.data).to.equal('Genesis Block');
+        expect(lastBlock.transactions).to.equal('Genesis Block');
 
         blockchain.chain[1] = new Block(1, 'some data');
 
-        expect(blockchain.getLastBlock().data).to.equal('some data');
+        expect(blockchain.getLastBlock().transactions).to.equal('some data');
     });
 
     it('should append a new block', function() {
@@ -99,7 +99,7 @@ describe('Blockchain', function() {
         blockchain.addBlock(newBlock);
 
         var lastBlock = blockchain.getLastBlock();
-        expect(lastBlock.data).to.equal('some data');
+        expect(lastBlock.transactions).to.equal('some data');
     });
 
     it('appended blocks have a reference to the last block', function() {
@@ -180,7 +180,7 @@ describe('Blockchain', function() {
         blockchain.addBlock(new Block(1, "foobar"));
         blockchain.addBlock(new Block(1, "barbaz"));
 
-        blockchain.chain[2].data = 'modified data';
+        blockchain.chain[2].transactions = 'modified data';
 
         expect(blockchain.isValid()).to.equal(false);
     });

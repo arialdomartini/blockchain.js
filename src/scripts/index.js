@@ -1,9 +1,9 @@
 const SHA256 = require('crypto-js/sha256');
 
 class Block {
-    constructor(index, data) {
+    constructor(index, transactions) {
         this.index = index;
-        this.data = data;
+        this.transactions = transactions;
         this.nonce = 0;
         this.hash = this.calculateHash();
     }
@@ -13,7 +13,7 @@ class Block {
     }
 
     calculateWithNonce(nonce) {
-        return SHA256(this.index + this.data + nonce + this.parentBlock)
+        return SHA256(this.index + this.transactions + nonce + this.parentBlock)
             .toString();
     }
 
