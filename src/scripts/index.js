@@ -1,11 +1,21 @@
 const SHA256 = require('crypto-js/sha256');
 
+class Transaction {
+    constructor(timeStamp, payerAddress, payeeAddress, amount) {
+        this.timeStamp = timeStamp;
+        this.payerAddress = payerAddress;
+        this.payeeAddress = payeeAddress;
+        this.amount = amount;
+    }
+}
+
 class Block {
     constructor(index, transactions) {
         this.index = index;
         this.transactions = transactions;
         this.nonce = 0;
         this.hash = this.calculateHash();
+        this.unminedTransactions = [];
     }
 
     calculateHash() {
