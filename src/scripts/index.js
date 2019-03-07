@@ -99,6 +99,25 @@ class Blockchain {
         }
         return true;
     }
+
+    createTransaction(transaction) {
+        unminedTransactions.push(transaction);
+    }
+
+    getAddressBalance(address) {
+        let balance = 0;
+        for (const block of this.chain) {
+            for (const transaction of block.transactions) {
+                if(transaction.payerAddress === address) {
+                    balance -= transaction.amount;
+                }
+                if(transaction.payeeAddress === address) {
+                    balance += transaction.amount;
+                }
+            }
+        }
+        return balance;
+    }
 }
 
 module.exports.Block = Block;
