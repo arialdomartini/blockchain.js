@@ -16,6 +16,7 @@ class Block {
         this.nonce = 0;
         this.hash = this.calculateHash();
         this.unminedTransactions = [];
+        this.miningReward = 15;
     }
 
     calculateHash() {
@@ -72,6 +73,17 @@ class Blockchain {
         newBlock.parentBlock = this.getLastBlock().hash;
         newBlock.mine(this.difficulty);
         this.chain.push(newBlock);
+    }
+
+    //     constructor(timeStamp, payerAddress, payeeAddress, amount) {
+    mineCurrentBlock(minerAddress) {
+        let block = new Block(Date.now(), this.unminedTransactions, this.getLastBlock().hash);
+        block.mine(this.difficulty);
+        console.log('Block successfully mined');
+        this.chain.push(block);
+        this.unminedTransactions = [
+            new Transaction(Date.now(), 'mint', minerAddress, this.miningReward  )
+        ];
     }
 
     isValid() {
